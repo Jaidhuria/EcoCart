@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | EcoCart Global Expansion</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-dark: #000;
+      --card-bg: #111;
+      --primary: #00f7ff;
+      --secondary: #00a8ff;
+      --accent: #ff00aa;
+      --text-light: #f5f5f5;
+      --text-muted: #aaa;
+      --border: #1f1f1f;
+      --success: #00e676;
+      --warning: #ff9100;
+      --danger: #ff3d71;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* Header with Profile Dropdown */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(9, 9, 9, 0.95);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+
+    header img {
+      height: auto;
+      width: 100px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      transition: 0.3s;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    .profile-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .profile-btn {
+      background: none;
+      border: none;
+      color: var(--text-light);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+    }
+
+    .profile-btn i {
+      font-size: 1.2rem;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      right: 0;
+      top: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.5rem 0;
+      min-width: 180px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+      z-index: 1001;
+    }
+
+    .dropdown-menu.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 0.7rem 1.5rem;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .dropdown-menu a:hover {
+      background: rgba(0, 247, 255, 0.1);
+      color: var(--primary);
+    }
+
+    .dropdown-menu a i {
+      margin-right: 0.7rem;
+      width: 20px;
+      text-align: center;
+    }
+
+    /* Main Content */
+    .section {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      margin-bottom: 2rem;
+      color: var(--primary);
+      font-family: 'Orbitron', sans-serif;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 3px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      background: radial-gradient(circle at center, rgba(0,247,255,0.1) 0%, rgba(0,0,0,1) 70%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: 
+        radial-gradient(circle, transparent 20%, 
+        rgba(0, 247, 255, 0.05) 20%, 
+        rgba(0, 247, 255, 0.05) 21%, 
+        transparent 21%, transparent),
+        radial-gradient(circle, transparent 20%, 
+        rgba(0, 247, 255, 0.05) 20%, 
+        rgba(0, 247, 255, 0.05) 21%, 
+        transparent 21%, transparent),
+        radial-gradient(circle, transparent 10%, 
+        rgba(0, 247, 255, 0.05) 10%, 
+        rgba(0, 247, 255, 0.05) 11%, 
+        transparent 11%, transparent);
+      background-size: 100px 100px;
+      background-position: 0 0, 50px 50px, 25px 75px;
+      animation: float 15s linear infinite;
+      z-index: -1;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      color: var(--primary);
+      font-family: 'Orbitron', sans-serif;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: none;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      padding: 0.8rem 2rem;
+      margin-top: 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: var(--primary);
+      color: #000;
+      box-shadow: 0 0 20px var(--primary);
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      border-color: var(--secondary);
+      color: var(--secondary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--secondary);
+      color: #000;
+      box-shadow: 0 0 20px var(--secondary);
+    }
+
+    /* Grid Layout */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    /* Enhanced Cards */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.8rem;
+      box-shadow: 0 4px 20px rgba(0, 247, 255, 0.07);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0, 247, 255, 0.03) 0%, transparent 100%);
+      z-index: 0;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(0, 247, 255, 0.15);
+      border-color: rgba(0, 247, 255, 0.3);
+    }
+
+    /* Contact Page Specific Styles */
+    .contact-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+      margin-top: 2rem;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .contact-method {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+
+    .contact-icon {
+      font-size: 1.8rem;
+      color: var(--primary);
+      min-width: 40px;
+      text-align: center;
+      margin-top: 5px;
+    }
+
+    .contact-details h3 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+    }
+
+    .contact-details p, .contact-details a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .contact-details a:hover {
+      color: var(--primary);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(0, 247, 255, 0.1);
+      color: var(--primary);
+      transition: all 0.3s;
+    }
+
+    .social-links a:hover {
+      background: var(--primary);
+      color: #000;
+      transform: translateY(-3px);
+    }
+
+    .contact-form {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0, 247, 255, 0.07);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-muted);
+    }
+
+    form input,
+    form textarea,
+    form select {
+      width: 100%;
+      padding: 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.3);
+      color: var(--text-light);
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s;
+    }
+
+    form input:focus,
+    form textarea:focus,
+    form select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(0, 247, 255, 0.2);
+    }
+
+    form textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    form button {
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .map-container {
+      margin-top: 3rem;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0, 247, 255, 0.07);
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+    }
+
+    /* Footer */
+    footer {
+      background: #050505;
+      padding: 4rem 2rem 2rem;
+      border-top: 1px solid var(--border);
+      margin-top: 4rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-column h3 {
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .footer-column p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+      transform: translateX(5px);
+    }
+
+    .footer-links a i {
+      margin-right: 0.7rem;
+      width: 20px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-bottom p {
+      margin-bottom: 0.5rem;
+    }
+
+    .legal-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .legal-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .legal-links a:hover {
+      color: var(--primary);
+    }
+
+    /* Animations */
+    @keyframes float {
+      0% {
+        background-position: 0 0, 50px 50px, 25px 75px;
+      }
+      100% {
+        background-position: 100px 100px, 150px 150px, 125px 175px;
+      }
+    }
+
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.7s cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    .visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      nav {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+      }
+
+      .section {
+        padding: 3rem 1rem;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+      }
+      
+      .contact-method {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      
+      .social-links {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img width="auto" src="logo2.png" alt="EcoCart Logo">
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="index.html#personas">Personas</a>
+      <a href="index.html#insights">Insights</a>
+      <div class="profile-container">
+        <button class="profile-btn">
+          <i class="fas fa-user-circle"></i>
+          <span>Profile</span>
+        </button>
+        <div class="dropdown-menu">
+          <a href="#"><i class="fas fa-user"></i> My Profile</a>
+          <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+          <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+          <a href="sett.html"><i class="fas fa-trophy"></i>Rankings</a>
+          <a href="#"><i class="fas fa-headset"></i> Contact Us</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Contact EcoCart</h1>
+    <p>Get in touch with our team for inquiries, support, or partnership opportunities. We're here to help you navigate the future of AI-driven e-commerce.</p>
+    <div>
+      <a href="#contact-form" class="btn">Send a Message</a>
+      <a href="#contact-info" class="btn btn-secondary">Contact Info</a>
+    </div>
+  </section>
+
+  <section class="section" id="contact-info">
+    <h2 class="section-title">How to Reach Us</h2>
+    
+    <div class="contact-container">
+      <div class="contact-info">
+        <div class="contact-method animate-on-scroll">
+          <div class="contact-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div class="contact-details">
+            <h3>Global Headquarters</h3>
+            <p>101 Market Street<br>Singapore 048937</p>
+            <a href="#" class="btn btn-secondary" style="display: inline-block; margin-top: 1rem;">Get Directions</a>
+          </div>
+        </div>
+        
+        <div class="contact-method animate-on-scroll">
+          <div class="contact-icon">
+            <i class="fas fa-phone-alt"></i>
+          </div>
+          <div class="contact-details">
+            <h3>Phone Support</h3>
+            <p>General Inquiries: <a href="tel:+6561234567">+65 6123 4567</a><br>
+            Technical Support: <a href="tel:+6561234568">+65 6123 4568</a></p>
+            <p>Mon-Fri: 9:00 AM - 6:00 PM SGT</p>
+          </div>
+        </div>
+        
+        <div class="contact-method animate-on-scroll">
+          <div class="contact-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="contact-details">
+            <h3>Email Us</h3>
+            <p>General: <a href="mailto:info@ecocart.sg">info@ecocart.sg</a><br>
+            Support: <a href="mailto:support@ecocart.sg">support@ecocart.sg</a><br>
+            Partnerships: <a href="mailto:partners@ecocart.sg">partners@ecocart.sg</a></p>
+            
+            <div class="social-links">
+              <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="contact-form animate-on-scroll" id="contact-form">
+        <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Send Us a Message</h3>
+        <form>
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" required />
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <select id="subject" required>
+              <option value="">Select a subject</option>
+              <option value="sales">Sales Inquiry</option>
+              <option value="support">Technical Support</option>
+              <option value="partnership">Partnership Opportunity</option>
+              <option value="api">API Integration</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Your Message</label>
+            <textarea id="message" rows="6" required></textarea>
+          </div>
+          <button type="submit" class="btn">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+    
+    <div class="map-container animate-on-scroll">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.797156585889!2d103.8503143153316!3d1.294785299054028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMTcnNDEuMiJOIDEwM8KwNTEnMDguNiJF!5e0!3m2!1sen!2ssg!4v1620000000000!5m2!1sen!2ssg" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>EcoCart Solutions</h3>
+        <p>Transforming global e-commerce through AI-powered customer segmentation and targeted marketing strategies.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="index.html#about"><i class="fas fa-chevron-right"></i> About Us</a></li>
+          <li><a href="index.html#personas"><i class="fas fa-chevron-right"></i> Customer Personas</a></li>
+          <li><a href="index.html#insights"><i class="fas fa-chevron-right"></i> Market Insights</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Resources</h3>
+        <ul class="footer-links">
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Case Studies</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Whitepapers</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> API Documentation</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Help Center</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Contact Info</h3>
+        <ul class="footer-links">
+          <li><a href="#"><i class="fas fa-map-marker-alt"></i> 101 Market St, Singapore 048937</a></li>
+          <li><a href="tel:+6561234567"><i class="fas fa-phone"></i> +65 6123 4567</a></li>
+          <li><a href="mailto:info@ecocart.sg"><i class="fas fa-envelope"></i> info@ecocart.sg</a></li>
+          <li><i class="fas fa-clock"></i> Mon-Fri: 9:00 AM - 6:00 PM SGT</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 EcoCart Solutions Pte Ltd. All rights reserved.</p>
+      <div class="legal-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">GDPR Compliance</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Profile Dropdown Toggle
+    const profileBtn = document.querySelector('.profile-btn');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+
+    profileBtn.addEventListener('click', () => {
+      dropdownMenu.classList.toggle('show');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.profile-container')) {
+        dropdownMenu.classList.remove('show');
+      }
+    });
+
+    // Animate on scroll
+    const animateOnScroll = () => {
+      document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        const boxTop = el.getBoundingClientRect().top;
+        if (boxTop < window.innerHeight * 0.85) {
+          el.classList.add('visible');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', animateOnScroll);
+    window.addEventListener('load', animateOnScroll);
+
+    // Form submission
+    const contactForm = document.querySelector('form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        // Here you would typically send the form data to your server
+        alert('Thank you for your message! We will get back to you soon.');
+        contactForm.reset();
+      });
+    }
+  </script>
+
+</body>
+</html>
